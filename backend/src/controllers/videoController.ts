@@ -4,32 +4,29 @@ import { Request, Response } from 'express';
 const prisma = new PrismaClient();
 
 // Get all videos
-export const getVideos = async (req: Request, res: Response) => {
+export const getLink = async (req: Request, res: Response) => {
   try {
-    const videos = await prisma.video.findMany();
-    res.json(videos);
+    const links = await prisma.link.findMany();
+    res.json(links);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch videos' });
+    res.status(500).json({ error: 'Failed to fetch links.' });
   }
 };
 
 // Create a new video
-export const createVideo = async (req: Request, res: Response) => {
-  const { title, description, publicId, originalSize, compressedSize, duration } = req.body;
+export const addLink = async (req: Request, res: Response) => {
+  const { title,url, description } = req.body;
 
   try {
-    const video = await prisma.video.create({
+    const link = await prisma.link.create({
       data: {
         title,
-        description,
-        publicId,
-        originalSize,
-        compressedSize,
-        duration,
+        url,
+        description
       },
     });
-    res.status(201).json(video);
+    res.status(201).json(link);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create video' });
+    res.status(500).json({ error: 'Failed to add link.' });
   }
 };

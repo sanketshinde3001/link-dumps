@@ -1,18 +1,25 @@
 import express, { Request, Response } from 'express';
 import videoRoutes from './routes/videoRoutes.js'
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
 const port = 3000;
 
+
+// Enable CORS
+app.use(cors());
+
 // Use the video routes
 app.use('/api', videoRoutes);
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req: Request,res: Response) => {
     res.send('Hello, world!');
 });
-app.get('/hello', (req: Request, res: Response) => {
-    res.send('Hello, as!');
+
+app.post('/upload', (req: Request, res: Response) => {
+    console.log(req.body);
+    res.send('Upload successful!');
 });
 
 app.listen(port, () => {

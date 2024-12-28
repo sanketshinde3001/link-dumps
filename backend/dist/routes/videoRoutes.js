@@ -1,6 +1,6 @@
 import express from 'express';
-import { getVideos, createVideo } from '../controllers/videoController.js';
+import { getLink, addLink } from '../controllers/videoController.js';
 const router = express.Router();
-router.get('/videos', getVideos);
-router.post('/videos', createVideo);
+router.get('/link', getLink);
+router.post('/link', addLink);
 export default router;
