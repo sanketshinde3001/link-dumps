@@ -13,18 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Video {
-  id             String   @id @default(cuid())
-  title          String
-  description    String?
-  publicId       String
-  originalSize   String
-  compressedSize String
-  duration       String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-}
-
 model Link {
   id          String   @id @default(cuid())
   title       String?
@@ -32,4 +20,15 @@ model Link {
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id            String @id @default(uuid())
+  githubId      String @unique
+  email         String?
+  name          String
+  avatarUrl     String?
+  accessToken   String?
+  refreshToken  String?
+  createdAt     DateTime @default(now())
 }

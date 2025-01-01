@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
-import videoRoutes from './routes/videoRoutes.js'
+import videoRoutes from './routes/linkRoutes.js'
+import authRoutes from "./routes/authRoutes.js";
 import cors from 'cors';
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 
 // Use the video routes
 app.use('/api', videoRoutes);
+app.use('/auth', authRoutes);
 
 app.get('/', (req: Request,res: Response) => {
     res.send('Hello, world!');
